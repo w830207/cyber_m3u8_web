@@ -8,6 +8,7 @@ class AppModel {
   Color backgroundColor;
   String head;
   String content;
+  Widget app;
 
   AppModel({
     required this.name,
@@ -17,5 +18,6 @@ class AppModel {
     this.backgroundColor = Colors.white,
     this.head = 'images/head0.png',
     this.content = '',
+    this.app = const SizedBox(),
   });
 }

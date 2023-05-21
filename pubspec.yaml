@@ -33,6 +33,11 @@ dependencies:
     sdk: flutter
   card_swiper: ^2.0.4
   url_launcher: ^6.1.7
+  animated_text_kit: ^4.2.2
+  flutter_svg: ^1.1.5
+  appinio_swiper:
+    git:
+      url: https://github.com/w830207/appinio_swiper.git
 
 dev_dependencies:
   flutter_test:

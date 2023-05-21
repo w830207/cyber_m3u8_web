@@ -1,7 +1,10 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:cyber_m3u8_web/app_model.dart';
+import 'package:cyber_m3u8_web/model/app_model.dart';
+import 'package:cyber_m3u8_web/example_app/m3u8.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'example_app/lang_ai.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
       googleLink:
           'https://play.google.com/store/apps/details?id=com.cbw.cyber_m3u8_mobile',
       content: "CyberPunk style M3u8 player.\n賽博M3u8播放器",
+      app: const M3U8(),
     );
     model1 = AppModel(
       name: '浪愛',
@@ -33,6 +37,7 @@ class _HomePageState extends State<HomePage> {
       appleLink: 'https://apps.apple.com/app/id6443711746',
       googleLink: '',
       content: "流浪動物認養\n以交友配對模式，呈現台灣動物收容所待領養貓狗。",
+      app: const LangAi(),
     );
 
     loadedModel = model0;
@@ -65,11 +70,11 @@ class _HomePageState extends State<HomePage> {
               },
               itemBuilder: (context, index) {
                 return swiperItem(
-                  image: loadedModel.image,
                   appleLink: loadedModel.appleLink,
                   googleLink: loadedModel.googleLink,
                   name: loadedModel.name,
                   content: loadedModel.content,
+                  app: loadedModel.app,
                 );
               },
               pagination: const SwiperPagination(),
@@ -84,24 +89,34 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget swiperItem({
-  required String image,
   required String appleLink,
   required String googleLink,
   required String name,
   required String content,
+  required Widget app,
 }) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Image.asset(
-              image,
-              width: 200,
-              height: 200,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(58),
+                  child: app,
+                ),
+                IgnorePointer(
+                  child: Image.asset(
+                    "images/phone.png",
+                    width: 290,
+                  ),
+                ),
+              ],
             ),
           ),
           Wrap(
