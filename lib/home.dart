@@ -1,9 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:cyber_m3u8_web/example_app/animated_list_item.dart';
 import 'package:cyber_m3u8_web/model/app_model.dart';
 import 'package:cyber_m3u8_web/example_app/m3u8.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'example_app/lang_ai.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,12 +15,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late AppModel loadedModel;
-  late AppModel model0;
-  late AppModel model1;
+
+  // late AppModel model0;
+  // late AppModel model1;
+  final List<AppModel> modelList = [];
+  late ScrollController scrollController;
 
   @override
   void initState() {
-    model0 = AppModel(
+    modelList.add(AppModel(
       name: 'Cyber M3u8',
       image: 'images/m3u8.webp',
       backgroundColor: const Color(0xFFCDCFCF),
@@ -29,18 +32,51 @@ class _HomePageState extends State<HomePage> {
           'https://play.google.com/store/apps/details?id=com.cbw.cyber_m3u8_mobile',
       content: "CyberPunk style M3u8 player.\n賽博M3u8播放器",
       app: const M3U8(),
-    );
-    model1 = AppModel(
+    ));
+    modelList.add(AppModel(
       name: '浪愛',
-      image: 'images/lang.png',
-      head: 'images/head1.png',
+      image: 'images/lang.webp',
+      head: 'images/head1.webp',
       appleLink: 'https://apps.apple.com/app/id6443711746',
-      googleLink: '',
       content: "流浪動物認養\n以交友配對模式，呈現台灣動物收容所待領養貓狗。",
       app: const LangAi(),
-    );
+    ));
+    modelList.add(AppModel(
+      name: 'animated_list_item',
+      head: 'images/head2.webp',
+      pubDevLink: 'https://pub.dev/packages/animated_list_item',
+      content: "Flutter Package\nprovides Animation of items in ListView, GridView, SliverList, etc.",
+      app: const AnimatedListItemExample(),
+    ));
 
-    loadedModel = model0;
+
+    // model0 = AppModel(
+    //   name: 'Cyber M3u8',
+    //   image: 'images/m3u8.webp',
+    //   backgroundColor: const Color(0xFFCDCFCF),
+    //   appleLink: 'https://apps.apple.com/app/id6444260314',
+    //   googleLink:
+    //       'https://play.google.com/store/apps/details?id=com.cbw.cyber_m3u8_mobile',
+    //   content: "CyberPunk style M3u8 player.\n賽博M3u8播放器",
+    //   app: const M3U8(),
+    // );
+    // model1 = AppModel(
+    //   name: '浪愛',
+    //   image: 'images/lang.webp',
+    //   head: 'images/head1.webp',
+    //   appleLink: 'https://apps.apple.com/app/id6443711746',
+    //   content: "流浪動物認養\n以交友配對模式，呈現台灣動物收容所待領養貓狗。",
+    //   app: const LangAi(),
+    // );
+    loadedModel = modelList.first;
+
+    scrollController = ScrollController();
+    scrollController.addListener(() {
+      // double max = scrollController.position.maxScrollExtent;
+      double scale = 1 - (scrollController.offset / 400);
+      if (scale < 0.1) scale = 0.1;
+      if (scale > 1) scale = 1;
+    });
 
     super.initState();
   }
@@ -48,41 +84,57 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: loadedModel.backgroundColor,
-      body: Column(
-        children: [
-          SizedBox(
-            height: 80,
-            child: Image.asset(loadedModel.head),
-          ),
-          Expanded(
-            child: Swiper(
-              onIndexChanged: (index) {
-                switch (index) {
-                  case 0:
-                    loadedModel = model0;
-                    break;
-                  case 1:
-                    loadedModel = model1;
-                    break;
-                }
-                setState(() {});
-              },
-              itemBuilder: (context, index) {
-                return swiperItem(
-                  appleLink: loadedModel.appleLink,
-                  googleLink: loadedModel.googleLink,
-                  name: loadedModel.name,
-                  content: loadedModel.content,
-                  app: loadedModel.app,
-                );
-              },
-              pagination: const SwiperPagination(),
-              control: const SwiperControl(),
-              itemCount: 2,
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          children: [
+            Transform.scale(
+              scale: 1.0,
+              child: Container(
+                color: loadedModel.backgroundColor,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 80,
+                      child: Image.asset(loadedModel.head),
+                    ),
+                    SizedBox(
+                      height: 800,
+                      child: Swiper(
+                        onIndexChanged: (index) {
+                          loadedModel = modelList[index];
+                          // switch (index) {
+                          //   case 0:
+                          //     loadedModel = model0;
+                          //     break;
+                          //   case 1:
+                          //     loadedModel = model1;
+                          //     break;
+                          // }
+                          setState(() {});
+                        },
+                        itemBuilder: (context, index) {
+                          return swiperItem(
+                            appleLink: loadedModel.appleLink,
+                            googleLink: loadedModel.googleLink,
+                            pubDevLink: loadedModel.pubDevLink,
+                            name: loadedModel.name,
+                            content: loadedModel.content,
+                            app: loadedModel.app,
+                          );
+                        },
+                        pagination: const SwiperPagination(),
+                        control: const SwiperControl(),
+                        itemCount: modelList.length,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -91,6 +143,7 @@ class _HomePageState extends State<HomePage> {
 Widget swiperItem({
   required String appleLink,
   required String googleLink,
+  required String pubDevLink,
   required String name,
   required String content,
   required Widget app,
@@ -112,7 +165,7 @@ Widget swiperItem({
                 ),
                 IgnorePointer(
                   child: Image.asset(
-                    "images/phone.png",
+                    "images/phone.webp",
                     width: 290,
                   ),
                 ),
@@ -123,8 +176,12 @@ Widget swiperItem({
             direction: Axis.vertical,
             spacing: 16,
             children: [
-              storeBtn('images/btn_appstore.png', appleLink),
-              storeBtn('images/btn_googleplay.png', googleLink),
+              if (appleLink.isNotEmpty)
+                storeBtn('images/btn_appstore.webp', appleLink),
+              if (googleLink.isNotEmpty)
+                storeBtn('images/btn_googleplay.webp', googleLink),
+              if (pubDevLink.isNotEmpty)
+                storeBtn('images/btn_pubdev.webp', pubDevLink),
             ],
           )
         ],

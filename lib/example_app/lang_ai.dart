@@ -126,7 +126,7 @@ class _LangAiState extends State<LangAi> {
                           sex: "F",
                           kind: "貓",
                           address: "雲林縣流浪動物收容所",
-                          imageUrl: "images/cat1.png",
+                          imageUrl: "images/cat1.webp",
                         ),
                         pressNo: () {
                           swiperController.pressToLeft();
@@ -141,7 +141,7 @@ class _LangAiState extends State<LangAi> {
                           sex: "F",
                           kind: "狗",
                           address: "雲林縣流浪動物收容所",
-                          imageUrl: "images/dog1.png",
+                          imageUrl: "images/dog1.webp",
                         ),
                         pressNo: () {
                           swiperController.pressToLeft();
@@ -156,7 +156,7 @@ class _LangAiState extends State<LangAi> {
                           sex: "M",
                           kind: "貓",
                           address: "新北市新店區安泰路235號",
-                          imageUrl: "images/cat2.png",
+                          imageUrl: "images/cat2.webp",
                         ),
                         pressNo: () {
                           swiperController.pressToLeft();

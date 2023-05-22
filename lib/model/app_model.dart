@@ -5,6 +5,7 @@ class AppModel {
   String image;
   String appleLink;
   String googleLink;
+  String pubDevLink;
   Color backgroundColor;
   String head;
   String content;
@@ -12,11 +13,12 @@ class AppModel {
 
   AppModel({
     required this.name,
-    required this.image,
+    this.image = '',
     this.appleLink = '',
     this.googleLink = '',
+    this.pubDevLink = '',
     this.backgroundColor = Colors.white,
-    this.head = 'images/head0.png',
+    this.head = 'images/head0.webp',
     this.content = '',
     this.app = const SizedBox(),
   });

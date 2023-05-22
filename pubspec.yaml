@@ -38,6 +38,7 @@ dependencies:
   appinio_swiper:
     git:
       url: https://github.com/w830207/appinio_swiper.git
+  animated_list_item: ^0.0.1
 
 dev_dependencies:
   flutter_test:
