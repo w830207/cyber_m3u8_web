@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../model/animal_model.dart';
-import '../theme/app_theme.dart';
+
+import '../../model/animal_model.dart';
+import '../../theme/app_theme.dart';
 
 Container card({
   required AnimalModel animalModel,
