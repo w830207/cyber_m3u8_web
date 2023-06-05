@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../model/app_model.dart';
+import '../widgets/navigation.dart';
 import 'example_app/animated_list_item.dart';
 import 'example_app/lang_ai.dart';
 import 'example_app/m3u8.dart';
-
 
 class SideProjectPage extends StatefulWidget {
   const SideProjectPage({Key? key}) : super(key: key);
@@ -58,41 +58,46 @@ class _SideProjectPageState extends State<SideProjectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        color: loadedModel.backgroundColor,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 80,
-              child: Image.asset(loadedModel.head),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Colors.black,
+          body: Container(
+            color: loadedModel.backgroundColor,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 80,
+                  child: Image.asset(loadedModel.head),
+                ),
+                SizedBox(
+                  height: 760,
+                  child: Swiper(
+                    onIndexChanged: (index) {
+                      loadedModel = modelList[index];
+                      setState(() {});
+                    },
+                    itemBuilder: (context, index) {
+                      return swiperItem(
+                        appleLink: loadedModel.appleLink,
+                        googleLink: loadedModel.googleLink,
+                        pubDevLink: loadedModel.pubDevLink,
+                        name: loadedModel.name,
+                        content: loadedModel.content,
+                        app: loadedModel.app,
+                      );
+                    },
+                    pagination: const SwiperPagination(),
+                    control: const SwiperControl(),
+                    itemCount: modelList.length,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 800,
-              child: Swiper(
-                onIndexChanged: (index) {
-                  loadedModel = modelList[index];
-                  setState(() {});
-                },
-                itemBuilder: (context, index) {
-                  return swiperItem(
-                    appleLink: loadedModel.appleLink,
-                    googleLink: loadedModel.googleLink,
-                    pubDevLink: loadedModel.pubDevLink,
-                    name: loadedModel.name,
-                    content: loadedModel.content,
-                    app: loadedModel.app,
-                  );
-                },
-                pagination: const SwiperPagination(),
-                control: const SwiperControl(),
-                itemCount: modelList.length,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        const Navigation(),
+      ],
     );
   }
 }
