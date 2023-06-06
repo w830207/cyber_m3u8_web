@@ -28,6 +28,12 @@ class Navigation extends StatelessWidget {
             },
             child: const Text("Side projects"),
           ),
+          TextButton(
+            onPressed: () {
+              context.go('/blog');
+            },
+            child: const Text("Blog"),
+          ),
         ],
       ),
     );

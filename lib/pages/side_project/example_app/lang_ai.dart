@@ -1,12 +1,10 @@
-
 import 'package:cyber_m3u8_web/model/animal_model.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../theme/app_theme.dart';
+import '../../../theme/app_theme.dart';
 import 'card.dart';
-
 
 class LangAi extends StatefulWidget {
   const LangAi({Key? key}) : super(key: key);
@@ -60,11 +58,11 @@ class _LangAiState extends State<LangAi> {
               label: " 配對",
               icon: SvgPicture.asset(
                 "images/home_card.svg",
-                color: ColorTheme.grayLight,
+                // color: ColorTheme.grayLight,
               ),
               acIcon: SvgPicture.asset(
                 "images/home_card.svg",
-                color: ColorTheme.pink,
+                // color: ColorTheme.pink,
               ),
             ),
             buildItem(

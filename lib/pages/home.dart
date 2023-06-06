@@ -1,4 +1,3 @@
-import 'package:cyber_m3u8_web/side_project/side_project.dart';
 import 'package:cyber_m3u8_web/widgets/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,12 @@ class HomePage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text("I am"),
+                    const Text("I am"),
                     SizedBox(
                       height: 80,
                       child: Image.asset('images/head0.webp'),
                     ),
-                    Text(", and this is my website."),
+                    const Text(", and this is my website."),
                   ],
                 ),
               ],

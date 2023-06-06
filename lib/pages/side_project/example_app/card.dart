@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../model/animal_model.dart';
-import '../../theme/app_theme.dart';
+import '../../../model/animal_model.dart';
+import '../../../theme/app_theme.dart';
 
 Container card({
   required AnimalModel animalModel,
@@ -54,7 +54,6 @@ Container card({
                 ),
                 child: SvgPicture.asset(
                   "images/match_undo.svg",
-                  color: ColorTheme.black,
                   width: 28,
                   height: 28,
                 ),
@@ -68,7 +67,6 @@ Container card({
               angle: 0.05,
               child: SvgPicture.asset(
                 'images/match_question.svg',
-                color: Colors.white,
                 width: 28,
                 height: 28,
               ),
@@ -173,11 +171,11 @@ Column shortId(AnimalModel animalModel, Color theColor) {
             animalModel.kind == "狗"
                 ? SvgPicture.asset(
                     'images/chose_bone.svg',
-                    color: theColor,
+                    // color: theColor,
                   )
                 : SvgPicture.asset(
                     'images/chose_fish.svg',
-                    color: theColor,
+                    // color: theColor,
                   ),
         ],
       ),

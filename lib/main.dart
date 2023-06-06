@@ -1,5 +1,6 @@
-import 'package:cyber_m3u8_web/home.dart';
-import 'package:cyber_m3u8_web/side_project/side_project.dart';
+import 'package:cyber_m3u8_web/pages/blog.dart';
+import 'package:cyber_m3u8_web/pages/home.dart';
+import 'package:cyber_m3u8_web/pages/side_project/side_project.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,6 +24,21 @@ final GoRouter _router = GoRouter(
           path: 'side_project',
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const SideProjectPage(),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child,
+              );
+            },
+          ),
+        ),
+        GoRoute(
+          path: 'blog',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const BlogPage(),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,

@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../../theme/app_theme.dart';
 
 class M3U8 extends StatefulWidget {
   const M3U8({Key? key}) : super(key: key);
@@ -41,8 +41,7 @@ class _M3U8State extends State<M3U8> {
                     pause: const Duration(milliseconds: 2000),
                     animatedTexts: [
                       TypewriterAnimatedText('Enter a m3u8 link'),
-                      TypewriterAnimatedText(
-                          'And press the "PLAY" button'),
+                      TypewriterAnimatedText('And press the "PLAY" button'),
                       TypewriterAnimatedText(
                           'Then you can watch stream video.'),
                       TypewriterAnimatedText(

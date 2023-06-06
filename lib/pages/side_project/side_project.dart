@@ -2,8 +2,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../model/app_model.dart';
-import '../widgets/navigation.dart';
+import '../../model/app_model.dart';
+import '../../widgets/navigation.dart';
 import 'example_app/animated_list_item.dart';
 import 'example_app/lang_ai.dart';
 import 'example_app/m3u8.dart';
